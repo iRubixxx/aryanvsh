@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryan Vishwakarma — Product Designer Portfolio</title>
+  <meta name="description"
+    content="Portfolio of Aryan Vishwakarma, a product designer telling stories visually and crafting digital experiences." />
+
+  <!-- Google Fonts: Bebas Neue (Header) & Plus Jakarta Sans (Logo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@1,800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @font-face {
+      font-family: 'Open Sauce Sans';
+      src: url('./Resources/Fonts/OpenSauceSans-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Open Sauce Sans';
+      src: url('./Resources/Fonts/OpenSauceSans-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Open Sauce Sans';
+      src: url('./Resources/Fonts/OpenSauceSans-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @theme {
+      --font-bebas: 'Bebas Neue', sans-serif;
+      --font-body: 'Open Sauce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-logo: 'Plus Jakarta Sans', sans-serif;
+      --color-primary: #000000;
+      --color-background: #ffffff;
+    }
+
+    .font-bebas {
+      font-family: var(--font-bebas);
+    }
+    .font-body {
+      font-family: var(--font-body);
+    }
+    .font-logo {
+      font-family: var(--font-logo);
+    }
+
+    html {
+      scroll-behavior: auto !important;
+    }
+
+    /* Subtle interactive link hover effect respecting minimalism */
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    /* Dynamic smooth color transition for fixed nav items */
+    .nav-adaptive {
+      color: #000000;
+      border-color: #000000;
+      transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 0.2s ease;
+    }
+    .nav-adaptive.nav-inverted {
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Custom Cursor Styles */
+    @media (pointer: fine) {
+      body, a, button, [role="button"] {
+        cursor: none !important;
+      }
+    }
+
+    #custom-cursor {
+      width: 8px;
+      height: 8px;
+      background-color: #000000;
+      opacity: 0;
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.2s ease;
+      will-change: transform;
+    }
+
+    /* Normal interactive links hover (slight enlargement) */
+    #custom-cursor.cursor-hover {
+      width: 14px;
+      height: 14px;
+      background-color: #000000;
+      opacity: 0.75;
+    }
+
+    /* Project card hover: expands to 64px circle with tilted arrow */
+    #custom-cursor.cursor-project {
+      width: 64px;
+      height: 64px;
+      background-color: #ffffff;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.08);
+      opacity: 1 !important;
+    }
+
+    #custom-cursor #cursor-arrow {
+      opacity: 0;
+      transform: scale(0.4) rotate(-15deg);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #custom-cursor.cursor-project #cursor-arrow {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    /* Hide custom cursor completely on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      #custom-cursor {
+        display: none !important;
+      }
+      body, a, button, [role="button"] {
+        cursor: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-black font-body antialiased selection:bg-black selection:text-white">
+
+  <!-- ======================================================================== -->
+  <!-- 1. FIXED TOP NAVIGATION BAR (Exact Figma Specs)                          -->
+  <!-- Node ID: 64:116 ("NavBar - Fixed")                                      -->
+  <!-- Padding: pt-[43px], px-6 sm:px-12 lg:px-[121px]                          -->
+  <!-- ======================================================================== -->
+  <header id="main-nav"
+    class="fixed top-0 left-0 right-0 z-50 w-full pt-6 sm:pt-8 lg:pt-[43px] px-6 sm:px-10 lg:px-[121px] pointer-events-none transition-all duration-300"
+    role="banner">
+    <div class="max-w-[1678px] mx-auto flex items-center justify-between pointer-events-auto">
+
+      <!-- Logo: Plus Jakarta Sans, 24px, ExtraBold Italic (800) -->
+      <a href="#hero" id="logo-brand"
+        class="nav-adaptive font-logo font-extrabold italic text-xl sm:text-2xl lg:text-[24px] leading-none tracking-[-2.5px] lg:tracking-[-3.8px] hover:opacity-75 focus-visible:outline-2 focus-visible:outline-current focus-visible:outline-offset-4"
+        aria-label="Aryan Vishwakarma Home">
+        AV
+      </a>
+
+      <!-- Desktop & Tablet Navigation Pages: Open Sauce Sans Medium (500), 12px, 174px itemSpacing -->
+      <nav id="primary-navigation" aria-label="Main Navigation"
+        class="hidden sm:flex items-center gap-8 md:gap-16 lg:gap-[174px]">
+        <a href="#work" id="nav-work"
+          class="nav-adaptive nav-link font-body font-medium text-[12px] tracking-normal uppercase focus-visible:outline-2 focus-visible:outline-current focus-visible:outline-offset-4">
+          ( WORK )
+        </a>
+        <a href="#about" id="nav-about"
+          class="nav-adaptive nav-link font-body font-medium text-[12px] tracking-normal uppercase focus-visible:outline-2 focus-visible:outline-current focus-visible:outline-offset-4">
+          ( ABOUT )
+        </a>
+        <a href="#contact" id="nav-contact"
+          class="nav-adaptive nav-link font-body font-medium text-[12px] tracking-normal uppercase focus-visible:outline-2 focus-visible:outline-current focus-visible:outline-offset-4">
+          ( CONTACT )
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================================================================== -->
+  <!-- 2. FIXED BOTTOM NAVIGATION BAR (Exact Figma Specs)                       -->
+  <!-- Node ID: 64:113 ("Bottom NavBar Fixed")                                 -->
+  <!-- Position: fixed bottom-0, pb-[43px], centered text                       -->
+  <!-- ======================================================================== -->
+  <footer id="bottom-nav"
+    class="fixed bottom-0 left-0 right-0 z-50 w-full pb-6 sm:pb-8 lg:pb-[43px] px-6 pointer-events-none"
+    role="contentinfo">
+    <div class="max-w-[1280px] mx-auto flex items-center justify-center pointer-events-auto">
+      <p id="footer-caption"
+        class="nav-adaptive font-body font-medium text-[12px] leading-normal tracking-normal text-center select-none uppercase">
+        DESIGN &amp; DIRECTION / &copy;2026
+      </p>
+    </div>
+  </footer>
+
+  <!-- ======================================================================== -->
+  <!-- 3. HERO SECTION (Exact Figma Specs)                                      -->
+  <!-- Node ID: 64:111 ("Hero")                                                -->
+  <!-- Bounding Box: 1920 x 1080                                               -->
+  <!-- ======================================================================== -->
+  <main id="main-content">
+    <section id="hero"
+      class="relative w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-24 sm:py-32 text-center bg-white overflow-hidden">
+      <div class="w-full max-w-[800px] flex flex-col items-center justify-center">
+
+        <!-- Header Text (Node 64:115): Bebas Neue, 77px, line-height 60px (78%), max-w-[460px] -->
+        <h1 id="hero-title"
+          class="font-bebas font-normal text-4xl sm:text-6xl md:text-7xl lg:text-[77px] leading-[0.88] lg:leading-[60px] text-black uppercase max-w-[320px] sm:max-w-[420px] lg:max-w-[460px] tracking-normal mx-auto select-text">
+          DESIGNING FOR<br />
+          HUMANS AND THEIR<br />
+          GREAT IDEAS
+        </h1>
+
+        <!-- Body Text (Node 64:112): Open Sauce Sans Medium (500), 18px, line-height 25.92px (144%), max-w-[432px] -->
+        <!-- Gap from Header to Body in Figma: 24px (mt-6) -->
+        <p id="hero-description"
+          class="font-body font-medium text-sm sm:text-base lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[25.92px] text-black max-w-[340px] sm:max-w-[400px] lg:max-w-[432px] mt-6 sm:mt-6 lg:mt-[24px] mx-auto text-center font-feature-settings">
+          Hi. I am Aryan Vishwakarma a product designer who loves telling stories visually and crafting digital
+          experiences . Nice to meet you.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================== -->
+    <!-- Scrollable Placeholder Sections to showcase the fixed navbars behavior    -->
+    <!-- ======================================================================== -->
+    <!-- ======================================================================== -->
+    <!-- WORK SECTION (Exact Figma Specs)                                         -->
+    <!-- Node ID: 64:122 ("work")                                                 -->
+    <!-- Bounding Box: 1920 x 1175                                               -->
+    <!-- ======================================================================== -->
+    <section id="work"
+      class="relative w-full bg-white pt-16 sm:pt-24 lg:pt-[199px] pb-16 sm:pb-24 lg:pb-[127px] px-6 sm:px-10 lg:px-16 2xl:px-[160px]">
+      <div class="max-w-[1599px] mx-auto">
+
+        <!-- Section Body Text (Node 64:127): Open Sauce Sans Medium, 16px, line-height 23.2px, max-w-[272px] -->
+        <p id="work-description"
+          class="font-body font-medium text-sm sm:text-base leading-[21px] sm:leading-[23.2px] text-black max-w-[272px] text-left mb-8 sm:mb-12 lg:mb-[57px] select-text">
+          works that i have done from nothing to sketching to designing to finishing them.
+        </p>
+
+        <!-- Project Images Gallery (Node 67:7 - Frame 19): 1599px x 723px with 27px gap -->
+        <div id="work-gallery"
+          class="grid grid-cols-1 lg:grid-cols-[1190fr_382fr] gap-6 lg:gap-[27px] items-stretch w-full">
+
+          <!-- Primary Project: PORTFOLIO (Node 64:123) - 1190px x 722px (ratio 1.649) -->
+          <a href="https://kartavya-joshi.vercel.app/" target="_blank" rel="noopener noreferrer"
+            class="project-card group relative block w-full overflow-hidden bg-neutral-100 aspect-[1190/722]"
+            aria-label="View Kartavya Joshi Portfolio Project">
+            <img src="./Resources/Project Images/PORTFOLIO.png" alt="Kartavya Joshi Portfolio Project Showcase"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+              loading="lazy" />
+          </a>
+
+          <!-- Secondary Projects Column (Node 67:6 - Frame 18): 382px x 723px with ~25px gap -->
+          <div class="flex flex-col justify-between gap-5 lg:gap-[24.7px] w-full">
+
+            <!-- Project 1: COMPRESS (Node 64:124) - 382px x 231px (ratio 1.655) -->
+            <a href="https://imagehubfree.vercel.app/" target="_blank" rel="noopener noreferrer"
+              class="project-card group relative block w-full overflow-hidden bg-neutral-100 aspect-[382/231]"
+              aria-label="View ImageHub Free Project">
+              <img src="./Resources/Project Images/COMPRESS.png" alt="ImageHub Free Project Showcase"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                loading="lazy" />
+            </a>
+
+            <!-- Project 2: BS-JOB (Node 64:125) - 382px x 231px (ratio 1.649) -->
+            <a href="https://bsjobconsultants.vercel.app/" target="_blank" rel="noopener noreferrer"
+              class="project-card group relative block w-full overflow-hidden bg-neutral-100 aspect-[382/231]"
+              aria-label="View BS Job Consultants Project">
+              <img src="./Resources/Project Images/BS-JOB.png" alt="BS Job Consultants Project Showcase"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                loading="lazy" />
+            </a>
+
+            <!-- Project 3: NPC-OR-NOT (Node 67:3) - 382px x 212px (ratio 1.803) -->
+            <a href="https://npc-or-not.vercel.app/" target="_blank" rel="noopener noreferrer"
+              class="project-card group relative block w-full overflow-hidden bg-neutral-100 aspect-[382/212]"
+              aria-label="View NPC or Not Project">
+              <img src="./Resources/Project Images/NPC-OR-NOT.png" alt="NPC or Not Project Showcase"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                loading="lazy" />
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================== -->
+    <!-- ABOUT SECTION (Exact Figma Specs)                                        -->
+    <!-- Node ID: 64:128 ("about")                                                -->
+    <!-- Bounding Box: 1920 x 1024                                               -->
+    <!-- ======================================================================== -->
+    <section id="about"
+      class="relative w-full min-h-screen bg-white flex flex-col justify-center pt-24 sm:pt-32 lg:pt-[307px] pb-24 sm:pb-32 lg:pb-[352px] px-6 sm:px-12 md:px-20 lg:px-32 2xl:px-0">
+      <div class="w-full max-w-[1920px] mx-auto 2xl:pl-[640px] xl:pl-[33.333%]">
+        <div class="max-w-[395px] flex flex-col gap-8 lg:gap-[45px] text-left">
+
+          <!-- Paragraph 1 (Node 64:129): Open Sauce Sans Medium, 22px, line-height 31.9px, text-black, max-w-[395px] -->
+          <p id="about-bio-1"
+            class="font-body font-medium text-lg sm:text-xl lg:text-[22px] leading-[28px] sm:leading-[30px] lg:leading-[31.9px] text-black select-text">
+            I am Aryan Vishwakarma, based in Indore, Madhya Pradesh. I have a great love for design and art I like
+            minimalism and simplicity in design and telling story through visuals.
+          </p>
+
+          <!-- Paragraph 2 (Node 64:130): Open Sauce Sans Medium, 22px, line-height 31.9px, text-black, max-w-[395px] -->
+          <p id="about-bio-2"
+            class="font-body font-medium text-lg sm:text-xl lg:text-[22px] leading-[28px] sm:leading-[30px] lg:leading-[31.9px] text-black select-text">
+            I worked with 3 startups and learned that great idea needs great implementation and a great team. Currently
+            pursing my MBA to learn more about how market works.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================== -->
+    <!-- CONTACT SECTION (Exact Figma Specs)                                      -->
+    <!-- Node ID: 64:131 ("contact")                                              -->
+    <!-- Bounding Box: 1920 x 1024                                               -->
+    <!-- ======================================================================== -->
+    <section id="contact"
+      class="relative w-full min-h-screen bg-white flex flex-col items-center justify-center px-6 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24 lg:pb-28">
+      <div class="w-full max-w-[1920px] mx-auto flex flex-col items-center justify-center text-center">
+
+        <!-- Frame 17 (Node 64:133): Top Work Inquiry Block, width 389px, height 52px, itemSpacing 3px -->
+        <div id="contact-inquiry"
+          class="flex flex-col items-center justify-center gap-[3px] max-w-[389px] mb-8 sm:mb-10 lg:mb-12">
+          <span class="font-body font-medium text-[12px] tracking-wider text-neutral-500 uppercase">
+            FOR WORK
+          </span>
+          <a href="mailto:vishwakarmaaryan1003@gmail.com"
+            class="font-body font-medium text-[12px] sm:text-[14px] text-black hover:opacity-60 transition-opacity select-all">
+            vishwakarmaaryan1003@gmail.com
+          </a>
+        </div>
+
+        <!-- Header Text (Node 64:139): Bebas Neue, 77px, line-height 60px, max-w-[504px], color #000000 -->
+        <h2 id="contact-title"
+          class="font-bebas font-normal text-4xl sm:text-6xl md:text-7xl lg:text-[77px] leading-[0.88] lg:leading-[60px] text-black uppercase max-w-[340px] sm:max-w-[460px] lg:max-w-[504px] tracking-normal mx-auto select-text mb-8 sm:mb-10 lg:mb-12">
+          CONNECTING TO<br />
+          PEOPLE IS FREE IN<br />
+          THIS WORLD
+        </h2>
+
+        <!-- Frame 16 (Node 64:136): Horizontal Links, width 251px, itemSpacing 67px -->
+        <nav id="contact-links" aria-label="Social and Contact Links"
+          class="flex items-center justify-center gap-8 sm:gap-12 lg:gap-[67px] font-body font-medium text-[12px] text-black uppercase">
+          <a href="mailto:vishwakarmaaryan1003@gmail.com"
+            class="nav-link hover:opacity-60 transition-opacity focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-4">(
+            EMAIL )</a>
+          <a href="https://www.linkedin.com/in/aryanvsh" target="_blank" rel="noopener noreferrer"
+            class="nav-link hover:opacity-60 transition-opacity focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-4">(
+            LINKEDIN )</a>
+          <a href="https://x.com/irubixxxx" target="_blank" rel="noopener noreferrer"
+            class="nav-link hover:opacity-60 transition-opacity focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-4">(
+            TWITTER )</a>
+        </nav>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Custom Modern Cursor -->
+  <div id="custom-cursor" aria-hidden="true">
+    <svg id="cursor-arrow" class="w-6 h-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="7" y1="17" x2="17" y2="7"></line>
+      <polyline points="7 7 17 7 17 17"></polyline>
+    </svg>
+  </div>
+
+  <!-- Interactive Scripts & Lenis Smooth Scroll -->
+  <script type="module">
+    import Lenis from 'lenis';
+    import 'lenis/dist/lenis.css';
+
+    // Initialize Lenis Buttery Smooth Scroll (Power-Type inspired)
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.8,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Smooth scroll to anchor links with Lenis
+    document.querySelectorAll('a[href^="#"]:not(.project-card)').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            lenis.scrollTo(targetEl, {
+              duration: 1.4,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          }
+        }
+      });
+    });
+
+    // Dynamic Inverted Text Effect: seamlessly transitions nav elements from black to white
+    // when any dark element (such as project gallery images) scrolls behind them.
+    const adaptiveElements = document.querySelectorAll('.nav-adaptive');
+    const darkTargets = document.querySelectorAll('#work-gallery img, [data-dark]');
+
+    function checkOverlap(rectA, rectB) {
+      return !(
+        rectA.right < rectB.left ||
+        rectA.left > rectB.right ||
+        rectA.bottom < rectB.top ||
+        rectA.top > rectB.bottom
+      );
+    }
+
+    function updateNavContrast() {
+      const darkRects = [];
+      darkTargets.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) {
+          darkRects.push(r);
+        }
+      });
+
+      adaptiveElements.forEach(item => {
+        const itemRect = item.getBoundingClientRect();
+        if (itemRect.width === 0 || itemRect.height === 0) return;
+
+        let isOverDark = false;
+        for (let i = 0; i < darkRects.length; i++) {
+          if (checkOverlap(itemRect, darkRects[i])) {
+            isOverDark = true;
+            break;
+          }
+        }
+
+        if (isOverDark) {
+          item.classList.add('nav-inverted');
+        } else {
+          item.classList.remove('nav-inverted');
+        }
+      });
+    }
+
+    // Hook into Lenis scroll events for 120fps sync
+    lenis.on('scroll', () => {
+      updateNavContrast();
+    });
+
+    window.addEventListener('resize', updateNavContrast, { passive: true });
+    window.addEventListener('load', updateNavContrast);
+    updateNavContrast();
+
+    // =========================================================================
+    // Custom Cursor with Fluid Lerping and Project Card Scale + Arrow
+    // =========================================================================
+    const cursor = document.getElementById('custom-cursor');
+    let mouseX = -100;
+    let mouseY = -100;
+    let cursorX = -100;
+    let cursorY = -100;
+    let isCursorActive = false;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isCursorActive) {
+        cursorX = mouseX;
+        cursorY = mouseY;
+        isCursorActive = true;
+        cursor.style.opacity = '1';
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      isCursorActive = false;
+      cursor.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      if (mouseX > 0 && mouseY > 0) {
+        isCursorActive = true;
+        cursor.style.opacity = '1';
+      }
+    });
+
+    function renderCursor() {
+      if (isCursorActive) {
+        cursorX += (mouseX - cursorX) * 0.25;
+        cursorY += (mouseY - cursorY) * 0.25;
+        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+      }
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    // Project cards hover: expands cursor into 64px circle with tilted arrow
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-project');
+        cursor.classList.remove('cursor-hover');
+      });
+      card.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-project');
+      });
+    });
+
+    // Standard interactive links and buttons: subtle hover expansion
+    const interactiveElements = document.querySelectorAll('a:not(.project-card), button');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (!cursor.classList.contains('cursor-project')) {
+          cursor.classList.add('cursor-hover');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-hover');
+      });
+    });
+  </script>
+</body>
+
+</html>
